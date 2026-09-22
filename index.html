@@ -1,76 +1,283 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Patogh</title>
 
     <style>
+
         @font-face {
-    font-family: "Luam";
-    src: url("LumaPrime-FreeDemo.otf");
-}
+            font-family: "Luam";
+            src: url("LumaPrime-FreeDemo.otf");
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             min-height: 100vh;
 
-            background: linear-gradient(aqua, blueviolet);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            font-family: "Luam", sans-serif;
+
+            background:
+                radial-gradient(circle at 20% 20%, #00ffff 0%, transparent 35%),
+                radial-gradient(circle at 80% 80%, #9b00ff 0%, transparent 35%),
+                linear-gradient(135deg, #08001c, #170047, #001b3d);
+
+            overflow-x: hidden;
+
+            position: relative;
+        }
+
+
+        /* حباب های نورانی */
+
+        body::before,
+        body::after {
+
+            content: "";
+
+            position: fixed;
+
+            width: 250px;
+            height: 250px;
+
+            border-radius: 50%;
+
+            filter: blur(70px);
+
+            opacity: 0.6;
+
+            z-index: 0;
+
+            animation: float 8s infinite alternate ease-in-out;
+        }
+
+        body::before {
+            background: cyan;
+            top: 5%;
+            left: 5%;
+        }
+
+        body::after {
+            background: #b400ff;
+            bottom: 5%;
+            right: 5%;
+            animation-delay: 2s;
+        }
+
+
+        @keyframes float {
+
+            from {
+                transform: translate(0, 0);
+            }
+
+            to {
+                transform: translate(40px, -30px);
+            }
+
+        }
+
+
+        /* کارت اصلی */
+
+        .glass {
+
+            width: min(850px, 92%);
+
+            padding: 35px;
+
+            border-radius: 30px;
+
+            background: rgba(255, 255, 255, 0.10);
+
+            border: 1px solid rgba(255, 255, 255, 0.25);
+
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+
+            box-shadow:
+                0 25px 60px rgba(0, 0, 0, 0.35),
+                inset 0 1px 1px rgba(255, 255, 255, 0.25);
 
             display: flex;
             flex-direction: column;
             align-items: center;
+
+            position: relative;
+            z-index: 1;
         }
+
+
+        /* ویدیو */
 
         video {
-            width: 700px;
-            height: 450px;
-            max-width: 90%;
-            margin-top: 50px;
-            border-radius: 15px;
+
+            width: 100%;
+
+            max-width: 760px;
+
+            border-radius: 22px;
+
+            display: block;
+
+            border: 1px solid rgba(255,255,255,0.3);
+
+            box-shadow:
+                0 15px 40px rgba(0,0,0,0.35);
+
+            background: rgba(0,0,0,0.25);
         }
 
-        .description {
+
+        /* متن */
+
+        #filtr {
+
             margin-top: 25px;
 
+            margin-bottom: 5px;
+
             color: white;
-            font-size: 20px;
+
+            font-size: 23px;
 
             text-align: center;
-            direction: rtl;
+
+            text-shadow:
+                0 2px 15px rgba(0,0,0,0.4);
         }
 
-        .lets-go {
-            margin-top: 20px;
-            padding: 12px 35px;
 
-            background-color: blueviolet;
+        /* دکمه */
+
+        .lets-go {
+
+            margin-top: 20px;
+
+            padding: 14px 45px;
+
+            border-radius: 15px;
+
             color: white;
 
             text-decoration: none;
-            border-radius: 12px;
 
-            font-family: "Luam", sans-serif;
             font-size: 22px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,255,255,0.25),
+                    rgba(255,255,255,0.08)
+                );
+
+            border: 1px solid rgba(255,255,255,0.35);
+
+            backdrop-filter: blur(10px);
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.25),
+                inset 0 1px 1px rgba(255,255,255,0.3);
+
+            transition: all 0.3s ease;
+
         }
-        #filtr {
-            font-family: "Luam" , sans-serif;
-            font-size: 22px;
-            
+
+
+        .lets-go:hover {
+
+            transform: translateY(-4px) scale(1.03);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,255,255,0.35),
+                    rgba(255,255,255,0.12)
+                );
+
+            box-shadow:
+                0 15px 35px rgba(0,0,0,0.35),
+                0 0 25px rgba(0,255,255,0.25);
+
         }
+
+
+        .lets-go:active {
+
+            transform: scale(0.97);
+
+        }
+
+
+        /* موبایل */
+
+        @media (max-width: 600px) {
+
+            .glass {
+
+                padding: 20px;
+
+                border-radius: 24px;
+
+            }
+
+            #filtr {
+
+                font-size: 19px;
+
+            }
+
+            .lets-go {
+
+                font-size: 19px;
+
+                padding: 12px 35px;
+
+            }
+
+        }
+
     </style>
+
 </head>
+
 
 <body>
 
-    <video controls>
-        <source src="Sequence 01_3.mp4" type="video/mp4">
-    </video>
 
-    <p id="filtr">😒فیلترتو روشن کن</p>
-    <a href="https://t.me/+c0ZYGdQaCGlhZmE0" class="lets-go">
-        Let's Go
-    </a>
+    <div class="glass">
+
+        <video controls>
+            <source src="Sequence 01_3.mp4" type="video/mp4">
+        </video>
+
+
+        <p id="filtr">
+            😒 فیلترتو روشن کن
+        </p>
+
+
+        <a
+            href="https://t.me/+c0ZYGdQaCGlhZmE0"
+            class="lets-go"
+        >
+            Let's Go
+        </a>
+
+    </div>
+
 
 </body>
 </html>
